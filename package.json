@@ -1,10 +1,11 @@
 {
-  "name": "course-registration-app",
+  "name": "ict461-lab-course-registration",
   "version": "1.0.0",
-  "description": "Student Management & Course Registration Portal",
+  "description": "ICT461 Lab Course Registration Portal",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start:api": "node server.js",
+    "start:frontend": "node frontend-server.js"
   },
   "dependencies": {
     "express": "^4.19.2"
