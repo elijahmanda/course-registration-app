@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Render registrations safely into DOM
+  // Render registrations safely into DOM with Inline Programme Editing
   function renderRecords() {
     recordsContainer.innerHTML = '';
 
@@ -106,11 +106,46 @@ document.addEventListener('DOMContentLoaded', () => {
       actions.style.gap = '0.5rem';
 
       const updateBtn = document.createElement('button');
+      updateBtn.type = 'button';
       updateBtn.className = 'btn btn-secondary';
       updateBtn.textContent = 'Change Programme';
-      updateBtn.addEventListener('click', async () => {
-        const newProg = prompt('Enter new programme:', record.programme);
-        if (newProg && newProg !== record.programme) {
+
+      // Inline Edit Mode
+      updateBtn.addEventListener('click', () => {
+        const editContainer = document.createElement('div');
+        editContainer.style.display = 'flex';
+        editContainer.style.gap = '0.5rem';
+        editContainer.style.marginTop = '0.5rem';
+
+        const select = document.createElement('select');
+        select.innerHTML = `
+          <option value="BSc Computer Science" ${record.programme === 'BSc Computer Science' ? 'selected' : ''}>BSc Computer Science</option>
+          <option value="BSc Information Technology" ${record.programme === 'BSc Information Technology' ? 'selected' : ''}>BSc Information Technology</option>
+          <option value="BSc Software Engineering" ${record.programme === 'BSc Software Engineering' ? 'selected' : ''}>BSc Software Engineering</option>
+        `;
+
+        const saveBtn = document.createElement('button');
+        saveBtn.type = 'button';
+        saveBtn.className = 'btn';
+        saveBtn.style.padding = '0.35rem 0.75rem';
+        saveBtn.style.fontSize = '0.85rem';
+        saveBtn.textContent = 'Save';
+
+        const cancelBtn = document.createElement('button');
+        cancelBtn.type = 'button';
+        cancelBtn.className = 'btn btn-secondary';
+        cancelBtn.style.padding = '0.35rem 0.75rem';
+        cancelBtn.style.fontSize = '0.85rem';
+        cancelBtn.textContent = 'Cancel';
+
+        saveBtn.addEventListener('click', async () => {
+          const newProg = select.value;
+          if (newProg === record.programme) {
+            showFeedback('No changes were made to the programme.', 'info');
+            renderRecords();
+            return;
+          }
+
           try {
             const updated = await patchProgramme(record.id, newProg);
             record.programme = updated.programme;
@@ -119,10 +154,21 @@ document.addEventListener('DOMContentLoaded', () => {
           } catch (err) {
             showFeedback(err.message, 'error');
           }
-        }
+        });
+
+        cancelBtn.addEventListener('click', () => {
+          renderRecords();
+        });
+
+        editContainer.appendChild(select);
+        editContainer.appendChild(saveBtn);
+        editContainer.appendChild(cancelBtn);
+
+        actions.replaceWith(editContainer);
       });
 
       const deleteBtn = document.createElement('button');
+      deleteBtn.type = 'button';
       deleteBtn.className = 'btn';
       deleteBtn.style.backgroundColor = '#dc2626';
       deleteBtn.textContent = 'Delete';
