@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academic Portal — Course Registration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="layout-container">
+    <header class="app-header">
+      <div class="brand">
+        <div class="logo-icon">🎓</div>
+        <div>
+          <h1>Academia Portal</h1>
+          <p>Student Directory & Course Registration</p>
+        </div>
+      </div>
+      <div class="metrics">
+        <div class="metric-card">
+          <span class="metric-value" id="student-count">0</span>
+          <span class="metric-label">Registered Students</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-value" id="course-count">0</span>
+          <span class="metric-label">Available Courses</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-grid">
+      <!-- Left Panel: Student Management -->
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Student Management</h2>
+        </div>
+
+        <form id="student-form" class="card-form">
+          <div class="form-row">
+            <div class="input-group">
+              <label for="student-name">Full Name</label>
+              <input type="text" id="student-name" placeholder="e.g. Jane Doe" required />
+            </div>
+            <div class="input-group">
+              <label for="student-email">Email Address</label>
+              <input type="email" id="student-email" placeholder="e.g. jane@university.edu" required />
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">+ Add Student</button>
+        </form>
+
+        <div class="section-title">
+          <h3>Enrolled Students</h3>
+        </div>
+
+        <div id="student-list" class="student-list"></div>
+      </section>
+
+      <!-- Right Panel: Course Catalog -->
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Course Catalog</h2>
+        </div>
+
+        <div id="course-catalog" class="course-catalog"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
