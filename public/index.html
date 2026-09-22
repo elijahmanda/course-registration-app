@@ -3,73 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Academic Portal — Course Registration</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Course Registration Portal | ICT461</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="layout-container">
-    <header class="app-header">
-      <div class="brand">
-        <div class="logo-icon">🎓</div>
-        <div>
-          <h1>Academia Portal</h1>
-          <p>Student Directory & Course Registration</p>
-        </div>
-      </div>
-      <div class="metrics">
-        <div class="metric-card">
-          <span class="metric-value" id="student-count">0</span>
-          <span class="metric-label">Registered Students</span>
-        </div>
-        <div class="metric-card">
-          <span class="metric-value" id="course-count">0</span>
-          <span class="metric-label">Available Courses</span>
-        </div>
-      </div>
-    </header>
+  <header>
+    <h1>ICT461 Academic Portal</h1>
+    <nav aria-label="Main Navigation">
+      <ul>
+        <li><a href="#registration-section">Register</a></li>
+        <li><a href="#records-section">Records</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <main class="dashboard-grid">
-      <!-- Left Panel: Student Management -->
-      <section class="panel">
-        <div class="panel-header">
-          <h2>Student Management</h2>
+  <main>
+    <section id="registration-section">
+      <h2>Course Registration Form</h2>
+      
+      <!-- Visible feedback area for screen readers and users -->
+      <div id="feedback" role="alert" aria-live="polite" class="feedback hidden"></div>
+
+      <form id="registration-form" novalidate>
+        <div class="form-group">
+          <label for="student-name">Full Name</label>
+          <input type="text" id="student-name" name="name" required placeholder="e.g., Jane Doe">
         </div>
 
-        <form id="student-form" class="card-form">
-          <div class="form-row">
-            <div class="input-group">
-              <label for="student-name">Full Name</label>
-              <input type="text" id="student-name" placeholder="e.g. Jane Doe" required />
-            </div>
-            <div class="input-group">
-              <label for="student-email">Email Address</label>
-              <input type="email" id="student-email" placeholder="e.g. jane@university.edu" required />
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary">+ Add Student</button>
-        </form>
-
-        <div class="section-title">
-          <h3>Enrolled Students</h3>
+        <div class="form-group">
+          <label for="student-id">Student ID</label>
+          <input type="text" id="student-id" name="studentId" required placeholder="e.g., 20261042">
         </div>
 
-        <div id="student-list" class="student-list"></div>
-      </section>
-
-      <!-- Right Panel: Course Catalog -->
-      <section class="panel">
-        <div class="panel-header">
-          <h2>Course Catalog</h2>
+        <div class="form-group">
+          <label for="programme">Programme</label>
+          <select id="programme" name="programme" required>
+            <option value="">-- Select Programme --</option>
+            <option value="BSc Computer Science">BSc Computer Science</option>
+            <option value="BSc Information Technology">BSc Information Technology</option>
+            <option value="BSc Software Engineering">BSc Software Engineering</option>
+          </select>
         </div>
 
-        <div id="course-catalog" class="course-catalog"></div>
-      </section>
-    </main>
-  </div>
+        <div class="form-group">
+          <label for="course">Course Code</label>
+          <select id="course" name="course" required>
+            <option value="">-- Loading Courses... --</option>
+          </select>
+        </div>
 
-  <script src="app.js"></script>
+        <button type="submit" id="submit-btn" class="btn">Submit Registration</button>
+      </form>
+    </section>
+
+    <section id="records-section">
+      <h2>Active Registrations</h2>
+      <button id="test-cookie-btn" class="btn btn-secondary">Test Cookie Route</button>
+      <div id="records-container" class="records-grid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 ICT461 Systems Engineering. All rights reserved.</p>
+  </footer>
+
+  <script type="module" src="app.js"></script>
 </body>
 </html>
